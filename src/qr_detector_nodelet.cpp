@@ -62,7 +62,9 @@ void QrDetectorNodelet::imageCallback(const sensor_msgs::ImageConstPtr &image)
   auto tags = detector_.detect(cv_image->image, 10);
   for (auto& tag : tags)
   {
-    tags_publisher_.publish(tag.message);
+    std_msgs::String message;
+    message.data = tag.message;
+    tags_publisher_.publish(message);
   }
 }
 
