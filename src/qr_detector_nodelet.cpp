@@ -7,11 +7,12 @@
 
 PLUGINLIB_EXPORT_CLASS(qr_detector::QrDetectorNodelet, nodelet::Nodelet);
 
-namespace qr_detector {
+namespace qr_detector
+{
 
-QrDetectorNodelet::QrDetectorNodelet()
-    : it_(nh_)
-{ }
+QrDetectorNodelet::QrDetectorNodelet() : it_(nh_)
+{
+}
 
 QrDetectorNodelet::~QrDetectorNodelet()
 {
@@ -22,9 +23,9 @@ void QrDetectorNodelet::onInit()
 {
   nh_ = getNodeHandle();
 
-  tags_publisher_ = nh_.advertise<std_msgs::String>("qr_codes", 10,
-                                                  std::bind(&QrDetectorNodelet::connectCallback, this),
-                                                  std::bind(&QrDetectorNodelet::disconnectCallback, this));
+  tags_publisher_ =
+      nh_.advertise<std_msgs::String>("qr_codes", 10, std::bind(&QrDetectorNodelet::connectCallback, this),
+                                      std::bind(&QrDetectorNodelet::disconnectCallback, this));
 
   NODELET_INFO_STREAM("Initializing nodelet... [" << nh_.getNamespace() << "]");
 }
@@ -47,14 +48,16 @@ void QrDetectorNodelet::disconnectCallback()
   }
 }
 
-void QrDetectorNodelet::imageCallback(const sensor_msgs::ImageConstPtr &image)
+void QrDetectorNodelet::imageCallback(const sensor_msgs::ImageConstPtr& image)
 {
   cv_bridge::CvImageConstPtr cv_image;
 
-  try {
+  try
+  {
     cv_image = cv_bridge::toCvShare(image, sensor_msgs::image_encodings::BGR8);
   }
-  catch (cv_bridge::Exception& e) {
+  catch (cv_bridge::Exception& e)
+  {
     ROS_ERROR("cv_bridge exception: %s", e.what());
     return;
   }
@@ -68,4 +71,4 @@ void QrDetectorNodelet::imageCallback(const sensor_msgs::ImageConstPtr &image)
   }
 }
 
-}
+}  // namespace qr_detector

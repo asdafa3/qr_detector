@@ -6,9 +6,11 @@
 #include <opencv2/opencv.hpp>
 #include "zbar.h"
 
-namespace qr_detector {
+namespace qr_detector
+{
 
-struct Tag {
+struct Tag
+{
   std::string message;
   std::vector<cv::Point> polygon;
 };
@@ -18,8 +20,9 @@ using Tags = std::vector<Tag>;
 /**
  * Main QR codes detector class
  */
-class Detector {
- public:
+class Detector
+{
+public:
   Detector();
   ~Detector() = default;
 
@@ -31,8 +34,8 @@ class Detector {
    */
   Tags detect(const cv::Mat& image, size_t timeout = 100);
 
- protected:
+protected:
   zbar::ImageScanner scanner_;
 };
 
-}
+}  // namespace qr_detector
