@@ -31,6 +31,12 @@ target_link_libraries(
   zbar
   ${catkin_LIBRARIES}
 )
+add_executable(test src/main.cpp)
+target_link_libraries(
+  test
+  qr_detector_nodelet
+)
+
 
 install(
   TARGETS qr_detector_nodelet

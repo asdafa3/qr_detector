@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <arg name="camera_topic" default="camera/rgb/image_raw"/>
+  <arg name="camera_topic" default="/camera/color/image_raw"/>
   <node pkg="nodelet" type="nodelet" name="qr_detector" args="standalone qr_detector/qr_detector_nodelet">
     <remap from="image" to="$(arg camera_topic)"/>
+    <remap from="qr_codes" to="/ps_adapter/custom_rec"/>
   </node>
 </launch>

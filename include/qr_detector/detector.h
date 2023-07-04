@@ -3,6 +3,10 @@
 #include <string>
 #include <vector>
 
+#include <algorithm>
+#include <iostream>
+#include <cctype>
+
 #include <opencv2/opencv.hpp>
 #include "zbar.h"
 
@@ -35,6 +39,7 @@ public:
   Tags detect(const cv::Mat& image, size_t timeout = 100);
 
 protected:
+  std::string formatMessage(const std::string& message);
   zbar::ImageScanner scanner_;
 };
 
