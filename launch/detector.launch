@@ -3,7 +3,7 @@
   <arg name="image_topic" default="/camera/color/image_raw"/>
   <node pkg="nodelet" type="nodelet" name="qr_detector" args="standalone qr_detector/qr_detector_nodelet">
     <param name="image_topic" value="$(arg image_topic)"/>
-    <remap from="image" to="$(arg camera_topic)"/>
+    <remap from="image" to="$(arg image_topic)"/>
     <remap from="qr_codes" to="/ps_adapter/custom_rec"/>
   </node>
 </launch>
